@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 require('dotenv/config');
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8000;
 const { Pool } = require('pg');
 const cors = require('cors');
 const pool = new Pool({ connectionString: process.env.ELEPHANT_SQL_CONNECTION_STRING }); 
-
+app.use(cors());
 app.use(express.json());
 app.get('/api/movies', (req, res) => {
     pool.query('SELECT * FROM movies;').then(data => {
